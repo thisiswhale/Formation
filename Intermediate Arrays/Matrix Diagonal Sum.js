@@ -1,5 +1,8 @@
 /*
 '''
+
+https://leetcode.com/problems/matrix-diagonal-sum/
+
 ❓ PROMPT
 Given a square matrix *mat*, return the sum of the matrix diagonals.
 
@@ -25,36 +28,27 @@ Input: [[5]]
 Output: 5
  
 
-🔎 EXPLORE
-List your assumptions & discoveries:
- 
-
-Insightful & revealing test cases:
- 
-
-🧠 BRAINSTORM
-What approaches could work?
-Algorithm 1:
-Time: O()
-Space: O()
- 
-
-📆 PLAN
-Outline of algorithm #: 
- 
-
-🛠️ IMPLEMENT
-function diagonalSum(matrix) {
-def diagonalSum(matrix: list[list[int]]) -> int:
- 
-
-🧪 VERIFY
-Run tests. Methodically debug & analyze issues.
+Time: O(sqrt(n))
+Space: O(1)
 
 '''
+
 */
+
 function diagonalSum(matrix) {
-  
+
+    if(!matrix.length) return 0
+    let sum = 0
+    for(let i = 0; i < matrix.length; i++){
+        if(i === matrix.length-1-i){
+            sum += mat[i][i]
+        }else {
+            sum += matrix[i][i]
+            sum+= matrix[i][mat.length-1-i]
+        }
+    }
+
+    return sum
 }
 
 let mat = 
