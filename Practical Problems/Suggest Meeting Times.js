@@ -94,7 +94,7 @@ output: [11,15]
   
 }
 
-
+// O(N log N) - the limiting factor is sorting the intervals
 */
 let schedules = {
   'Alice': [[8, 10], [13, 14]],
@@ -155,3 +155,46 @@ function findAvailableSlots(schedules, duration) {
 
   return availableSlots;
 }
+
+
+var schedules = {
+  'Alice': [[8, 10], [13, 14]],
+  'Bob': [[9, 11], [14, 15]],
+  'Charlie': [[10, 12], [15, 16]],
+}
+
+console.log(findAvailableSlots(schedules, 2), '[]')
+
+<space />
+
+<space />
+
+var schedules = {
+  'Alice': [[8, 10], [13, 14]],
+  'Bob': [[10, 11], [14, 15], [16, 17]],
+  'Charlie': [[11, 12], [15, 16]],
+}
+
+console.log(findAvailableSlots(schedules, 1), '[12]')
+
+<space />
+
+schedules = {
+  'Alice': [[8, 9], [10, 11], [13, 14]],
+  'Bob': [[9, 10], [14, 15]],
+  'Charlie': [[11, 12], [15, 16]],
+}
+
+console.log(findAvailableSlots(schedules, 1), '[12, 16]');//[12, 16]
+
+<space />
+
+<space />
+
+schedules = {
+  'Alice': [[9, 10], [11, 12], [13, 14]],
+  'Bob': [[10, 11], [12, 13], [14, 15]],
+  'Charlie': [[15, 16]],
+}
+
+console.log(findAvailableSlots(schedules, 1), "[8, 16]")
