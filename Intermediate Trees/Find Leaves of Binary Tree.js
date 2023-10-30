@@ -65,6 +65,30 @@ function findLeaves(root){
   return result;
 }
 
+function findLeaves(root){
+  const result = []
+
+  function getHeight(node){
+    if(!node) return -1
+
+    const leftH = getHeight(node.left)
+    const rightH = getHeight(node.right)
+
+    const currHeight = Math.max(leftH, rightH) + 1
+
+    if(currHeight === result.length) {
+      result.push([])
+    }
+    result[currHeight].push(node.value)
+
+    return currHeight
+  }
+
+  getHeight(root)
+  console.log(result)
+  return result
+}
+
 let root = new TreeNode(1,
   new TreeNode(2,
     new TreeNode(4),
