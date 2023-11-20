@@ -66,25 +66,26 @@ function arrarify(head){
 }
 
 function swapNodes(head, k) {
-  const dummyNode = new Node();
-  dummyNode.next = head;
+    let left = head, right = head
 
-  let firstPtr = dummyNode;
+    //i is at 1 bc k is at kth position, 
+    //ie [1,2,3,4,5], k = 2, swap 2 and 4
 
-  for (let i = 0; i < k; i++) {
-    firstPtr = firstPtr.next;
-  }
-  
-  let secondPtr = dummyNode;
-  let indicator = firstPtr;
+    //traverse left pointer til kth
+    for(let i = 1; i < k; i++){
+        left = left.next
+    }
 
-  while (indicator != null) {
-    indicator = indicator.next
-    secondPtr = secondPtr.next
-  }
-  
-  [secondPtr.value, firstPtr.value] = [firstPtr.value, secondPtr.value];
-  return head;
+    //create a curr pointer and traverse with right until end
+    let curr = left
+    while(curr.next){
+        right = right.next
+        curr = curr.next
+    }
+
+    [left.value, right.value] = [right.value,left.value]
+
+    return head
 }
 
 
