@@ -5,7 +5,8 @@
 var removeInvalidParentheses = function(s) {
     
     const array = s.split('');
-    const resultSet = new Set();
+    // const resultSet = new Set();
+    const result = []
     let removes = 0;
     let minRemoves = Number.MAX_VALUE;
 
@@ -28,7 +29,10 @@ var removeInvalidParentheses = function(s) {
 
         if (index === array.length) {
             if (isValidParens(array) && removes <= minRemoves) {
-                resultSet.add(array.join(''));
+                // resultSet.add(array.join(''));
+                if(!result.includes(array.join(''))){
+                    result.push(array.join(''));
+                }
                 minRemoves = removes;
             }
             return;
@@ -52,8 +56,10 @@ var removeInvalidParentheses = function(s) {
 
     helper(0);
 
+    return result
+
     // Leetcode wants the results in an array
-    const resultList = [];
-    resultSet.forEach(v => resultList.push(v));
-    return resultList;
+    // const resultList = [];
+    // resultSet.forEach(v => resultList.push(v));
+    // return resultList;
 };
