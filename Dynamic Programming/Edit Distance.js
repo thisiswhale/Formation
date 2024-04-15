@@ -30,17 +30,14 @@ console.log(levenshteinDistance("af12312fasfesf", "afase1iu3wfuwi")) // 10
 
 
 function levenshteinDistance(str1, str2) {
-    const m = str1.length;
-    const n = str2.length;
-    const dp = new Array(m + 1).fill().map(() => new Array(n + 1).fill(0))
 
-
-    // const dp = new Array(str1.length + 1).fill().map(() => new Array(str2.length+1).fill(0))
-
+    const dp = new Array(str1.length + 1).fill().map(() => new Array(str2.length+1).fill(0))
+    //Base case for min number character changes for when str2 length is 0
     for (let r = 0; r <= str1.length; r++){
         dp[r][0] = r
     }
 
+    //Base case for min number characters changers for when str1 length is 0
     for (let c = 0; c <= str2.length; c++){
         dp[0][c] = c
     }
@@ -48,8 +45,10 @@ function levenshteinDistance(str1, str2) {
     for (let i = 1; i <= str1.length; i++){
         for (let j = 1; j <= str2.length; j++){
             if (str1[i - 1] === str2[j - 1]) {
+               //Set to prev row and col bc nothing changed
                 dp[i][j] = dp[i-1][j-1]
             } else {
+               //Set to the min of (prev col, prev row, or prev row and col) + 1 (as insert, delete, or substitute)
                 dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1], dp[i-1][j-1])+1
             }
         }
