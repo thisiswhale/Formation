@@ -3,9 +3,9 @@
  * @param {number} k
  * @param {number} target
  * @return {number}
-
- https://leetcode.com/problems/number-of-dice-rolls-with-target-sum/
  
+ https://leetcode.com/problems/number-of-dice-rolls-with-target-sum/
+
 n, # of dice
 k, # of face of a dice
 target, sum of value
@@ -60,36 +60,38 @@ target, sum of value
 //SPACE: target
 var numRollsToTarget = function(n, k, target) {
     const MOD = 1e9 + 7;
-    let dp = new Array(target+1).fill(0)
-    dp[0] = 1
-    for(let numDice = 1; numDice <= n; numDice++){
-        for(let faceVal = 1; faceVal <= k; faceVal++){
-            let newDP = new Array(target+1).fill(0)
-            for(let currTarget = faceVal; currTarget <= target; currTarget++){
-                newDP[currTarget] = (newDP[currTarget] + dp[currTarget-faceVal]) % MOD
+    let dp = new Array(target + 1).fill(0);
+    dp[0] = 1;
+    for (let numDice = 1; numDice <= n; numDice++) {
+        const newDP = new Array(target + 1).fill(0); // Initialize newDP array for each numDice
+        for (let faceVal = 1; faceVal <= k; faceVal++) {
+            for (let currTarget = faceVal; currTarget <= target; currTarget++) {
+                newDP[currTarget] = (newDP[currTarget] + dp[currTarget - faceVal]) % MOD;
             }
-            dp = [...tempDP]
         }
+        // Update dp with newDP after processing all face values for numDice
+        // bc we are only check the row above
+        dp = [...newDP]; 
     }
-    return dp[target]
+    return dp[target];
 }
 //2D DP
 //TIME: n*k*target
 //SPACE: n * target
-var numRollsToTarget = function(n, k, target) {
-   const MOD = 1e9 + 7;
-    const table = new Array(n + 1).fill(null).map(() => new Array(target + 1).fill(0));
-    table[0][0] = 1;
+// var numRollsToTarget = function(n, k, target) {
+//    const MOD = 1e9 + 7;
+//     const table = new Array(n + 1).fill(null).map(() => new Array(target + 1).fill(0));
+//     table[0][0] = 1;
 
-    for (let numDice = 1; numDice <= n; numDice++) {
-        for (let faceVal = 1; faceVal <= k; faceVal++) {
-            for (let currTarget = faceVal; currTarget <= target; currTarget++) {
-                console.log(`Looking@ currTarget: ${currTarget} and faceVal: ${faceVal}`)
-                console.log(`table at [${numDice}][${currTarget}] is set to: `)
-                console.log(`${table[numDice][currTarget]}[${numDice}][${currTarget}] + ${table[numDice - 1][currTarget - faceVal]}[${numDice - 1}][${currTarget - faceVal}]`)
-                table[numDice][currTarget] = (table[numDice][currTarget] + table[numDice - 1][currTarget - faceVal]) % MOD;
-            }
-        }
-    }
-    return table[n][target];
-};
+//     for (let numDice = 1; numDice <= n; numDice++) {
+//         for (let faceVal = 1; faceVal <= k; faceVal++) {
+//             for (let currTarget = faceVal; currTarget <= target; currTarget++) {
+//                 console.log(`Looking@ currTarget: ${currTarget} and faceVal: ${faceVal}`)
+//                 console.log(`table at [${numDice}][${currTarget}] is set to: `)
+//                 console.log(`${table[numDice][currTarget]}[${numDice}][${currTarget}] + ${table[numDice - 1][currTarget - faceVal]}[${numDice - 1}][${currTarget - faceVal}]`)
+//                 table[numDice][currTarget] = (table[numDice][currTarget] + table[numDice - 1][currTarget - faceVal]) % MOD;
+//             }
+//         }
+//     }
+//     return table[n][target];
+// };
